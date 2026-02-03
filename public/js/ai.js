@@ -2,7 +2,7 @@ import { GROQ_API_KEY } from './config.js';
 
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
 
-// Debug API key loading
+
 console.log('=== API Key Debug ===');
 console.log('API Key exists:', !!GROQ_API_KEY);
 console.log('API Key length:', GROQ_API_KEY.length);
@@ -18,20 +18,20 @@ if (GROQ_API_KEY && GROQ_API_KEY !== 'gsk_paste_your_key_here_after_gsk_') {
     console.log('4. Refresh the page');
 }
 
-// State management
+
 let currentModel = 'llama-3.1-8b';
 let conversationHistory = [];
 let storageReady = false;
 
-// Check for window.storage availability
+
 const hasWindowStorage = typeof window !== 'undefined' && window.storage;
 
-// Model mapping
+
 const GROQ_MODELS = {
     'llama-3.1-8b': 'llama-3.1-8b-instant'
 };
 
-// Theme particle colors matching settings.js
+
 const themeParticleColors = {
     'default': ['#b026d3', '#d946ef', '#a855f7'],
     'blue': ['#6487e6', '#4776d9', '#a0b1ff'],
@@ -40,7 +40,7 @@ const themeParticleColors = {
     'green': ['#89e664', '#62be46', '#a8ffa0']
 };
 
-// Apply saved theme on load
+
 function applyTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -54,7 +54,7 @@ function applyTheme() {
     }
 }
 
-// Update particles when theme changes
+
 function updateParticleColors(themeName) {
     if (typeof pJSDom !== 'undefined' && pJSDom[0]) {
         const colors = themeParticleColors[themeName] || themeParticleColors.default;
@@ -65,7 +65,7 @@ function updateParticleColors(themeName) {
     }
 }
 
-// Listen for theme changes from other tabs/windows
+
 window.addEventListener('storage', (e) => {
     if (e.key === 'theme-change-event') {
         try {
@@ -81,7 +81,7 @@ window.addEventListener('storage', (e) => {
     }
 });
 
-// Listen for theme changes via BroadcastChannel
+
 if ('BroadcastChannel' in window) {
     const channel = new BroadcastChannel('theme_channel');
     channel.addEventListener('message', (event) => {
@@ -93,7 +93,7 @@ if ('BroadcastChannel' in window) {
     });
 }
 
-// Load saved model from storage
+
 async function loadSavedModel() {
     try {
         let savedModel = null;
@@ -119,7 +119,7 @@ async function loadSavedModel() {
     }
 }
 
-// Save model to storage
+
 async function saveModel(model) {
     try {
         if (hasWindowStorage) {
@@ -135,23 +135,23 @@ async function saveModel(model) {
     }
 }
 
-// Initialize on page load
+
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('🚀 Saturn AI initializing...');
     
-    // Apply theme first
+ 
     applyTheme();
     
-    // Detect current theme and update particles
+   
     const currentThemeName = localStorage.getItem('current-theme-name') || 'default';
     setTimeout(() => {
         updateParticleColors(currentThemeName);
     }, 500);
     
-    // Load saved model
+  
     await loadSavedModel();
     
-    // Update dropdown
+  
     const dropdown = document.getElementById('model-dropdown');
     if (dropdown) {
         dropdown.value = currentModel;
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('✅ Saturn AI initialized with model:', currentModel);
 });
 
-// Model dropdown change handler
+
 const modelDropdown = document.getElementById('model-dropdown');
 if (modelDropdown) {
     modelDropdown.addEventListener('change', async function() {
@@ -180,7 +180,7 @@ if (modelDropdown) {
     });
 }
 
-// Chat input auto-resize
+
 const chatInput = document.getElementById('chat-input');
 if (chatInput) {
     chatInput.addEventListener('input', function() {
@@ -188,7 +188,7 @@ if (chatInput) {
         this.style.height = Math.min(this.scrollHeight, 150) + 'px';
     });
 
-    // Enter to send
+
     chatInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -197,13 +197,13 @@ if (chatInput) {
     });
 }
 
-// Send button
+
 const sendBtn = document.getElementById('send-btn');
 if (sendBtn) {
     sendBtn.addEventListener('click', sendMessage);
 }
 
-// Add message to chat
+
 function addMessage(content, isUser) {
     const messagesContainer = document.getElementById('chat-messages');
     const welcomeScreen = document.getElementById('welcome-screen');
@@ -239,17 +239,17 @@ function addMessage(content, isUser) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Format message with markdown support
+
 function formatMessage(text) {
-    // Code blocks
+ 
     text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-    // Inline code
+  
     text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-    // Line breaks
+
     return text.replace(/\n/g, '<br>');
 }
 
-// Show/hide typing indicator
+
 function showTyping(show) {
     const typingIndicator = document.getElementById('typing-indicator');
     if (typingIndicator) {
@@ -261,9 +261,9 @@ function showTyping(show) {
     }
 }
 
-// Call Groq API
+
 async function callGroqAPI(messages) {
-    // Check API key before making request
+   
     if (!GROQ_API_KEY || GROQ_API_KEY === 'gsk_paste_your_key_here_after_gsk_') {
         throw new Error('API key not configured. Please edit js/config.js and add your Groq API key.');
     }
@@ -313,38 +313,38 @@ async function callGroqAPI(messages) {
     }
 }
 
-// Send message
+
 async function sendMessage() {
     const input = document.getElementById('chat-input');
     const message = input.value.trim();
     
     if (!message) return;
     
-    // Check API key first
+  
     if (!GROQ_API_KEY || GROQ_API_KEY === 'gsk_paste_your_key_here_after_gsk_') {
         addMessage('❌ API Key not configured! Please open js/config.js and add your Groq API key.', false);
         return;
     }
     
-    // Add user message
+
     addMessage(message, true);
     conversationHistory.push({ role: 'user', content: message });
     
-    // Clear input
+  
     input.value = '';
     input.style.height = 'auto';
     
-    // Show typing indicator
+ 
     showTyping(true);
     
     try {
-        // Call API
+     
         const aiResponse = await callGroqAPI(conversationHistory);
         
-        // Hide typing indicator
+    
         showTyping(false);
         
-        // Add AI response
+      
         addMessage(aiResponse, false);
         conversationHistory.push({ role: 'assistant', content: aiResponse });
         
