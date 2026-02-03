@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturn V2 | Settings</title>
+    <link rel="stylesheet" href="/css/s.css">
+    
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+
+ 
+    <div id="particles-js"></div>
+    <div class="grain-overlay"></div>
+
+    <div class="content">
+        <h1>Settings</h1>
+
+   
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('themes', this)">Appearance</button>
+            <button class="tab-btn"        onclick="switchTab('cloaking', this)">Cloaking</button>
+            <button class="tab-btn"        onclick="switchTab('proxy', this)">Proxy</button>
+        </div>
+
+     
+        <div id="themes" class="settings-section active">
+
+            <div class="setting-card">
+                <h2>Premade Themes</h2>
+                <p>Choose from our collection of pre-designed themes</p>
+                <div class="button-grid">
+                    <button onclick="clearTheme()">Default</button>
+                    <button onclick="setTheme('blue')">Blue</button>
+                    <button onclick="setTheme('night')">Night</button>
+                    <button onclick="setTheme('red')">Red</button>
+                    <button onclick="setTheme('green')">Green</button>
+                </div>
+            </div>
+
+            <div class="setting-card">
+                <h2>Custom Theme</h2>
+                <p>Create your own theme by editing CSS variables</p>
+                <textarea id="themebox" placeholder="Paste your custom CSS theme here..."></textarea>
+                <button onclick="loadCustomTheme()">Apply Custom Theme</button>
+            </div>
+
+            <div class="setting-card">
+                <h2>Custom Image</h2>
+                <p>Change the image shown in the top left of the screen</p>
+                <button onclick="setCustomImage()">Set Custom Image</button>
+            </div>
+        </div>
+
+  
+        <div id="cloaking" class="settings-section">
+
+            <div class="setting-card">
+                <h2>Premade Cloaks</h2>
+                <p>Quick presets for common websites</p>
+                <div class="button-grid">
+                    <button onclick="clearCloak()">Clear Cloak</button>
+                    <button onclick="setCloak('Google', 'https://google.com/favicon.ico')">Google</button>
+                    <button onclick="setCloak('Home - Google Drive', 'https://drive.google.com/favicon.ico')">Google Drive</button>
+                    <button onclick="setCloak('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico')">Google Docs</button>
+                    <button onclick="setCloak('Home', 'https://www.gstatic.com/classroom/ic_product_classroom_144.png')">Google Classroom</button>
+                </div>
+            </div>
+
+            <div class="setting-card">
+                <h2>Custom Title</h2>
+                <p>Set a custom page title</p>
+                <input id="custom-title" type="text" placeholder="Saturn Proxy | Settings">
+                <button onclick="setCustomTitle()">Apply Custom Title</button>
+            </div>
+
+            <div class="setting-card">
+                <h2>Custom Favicon</h2>
+                <p>Set a custom favicon URL</p>
+                <input id="custom-favicon" type="text" placeholder="https://google.com/favicon.ico">
+                <button onclick="setCustomFavicon()">Apply Custom Favicon</button>
+            </div>
+
+            <div class="setting-card">
+                <h2>about:blank Cloaking</h2>
+                <p>Opens Saturn Proxy in a new about:blank tab for maximum stealth</p>
+                <button onclick="openAboutBlank()">Open in about:blank</button>
+            </div>
+        </div>
+
+       
+        <div id="proxy" class="settings-section">
+
+            <div class="setting-card">
+                <h2>Proxy Backend</h2>
+                <p>Scramjet is faster but sites can break. UV is slower but more stable. Current: <span class="highlight" id="proxy-backend-status">[Loading...]</span></p>
+                <div class="button-grid">
+                    <button onclick="setProxyBackend('scramjet')">Scramjet</button>
+                    <button onclick="setProxyBackend('uv')">Ultraviolet</button>
+                </div>
+            </div>
+
+            <div class="setting-card">
+                <h2>Proxy Transport</h2>
+                <p>Configure the proxy transport layer. Current transport: <span class="highlight" id="proxtrans">[Loading...]</span></p>
+                <div class="button-grid">
+                    <button onclick="setConnection(1)">Epoxy Transport</button>
+                    <button onclick="setConnection(2)">Libcurl Transport</button>
+                </div>
+            </div>
+
+            <div class="setting-card">
+                <h2>Search Engine</h2>
+                <p>Choose your preferred search engine for the proxy. Current engine: <span class="highlight" id="search-engine-display">[Loading...]</span></p>
+                <div class="button-grid">
+                    <button onclick="setSearchEngine('duckduckgo')">DuckDuckGo</button>
+                    <button onclick="setSearchEngine('google')">Google</button>
+                    <button onclick="setSearchEngine('brave')">Brave</button>
+                    <button onclick="setSearchEngine('bing')">Bing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="version-info">Saturn Proxy v2</div>
+
+    <script src="/baremux/index.js"></script>
+    <script src="/libcurl/index.js"></script>
+    <script src="/epoxy/index.js"></script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/theme-loader.js"></script>
+    
+   
+    <script src="/js/background/particle.js"></script>
+
+</body>
+</html>

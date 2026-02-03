@@ -1,0 +1,35 @@
+# Keep API key safe - never commit this!
+js/config.js
+/js/config.js
+**/config.js
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Log files
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local

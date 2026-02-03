@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps | Saturn V2</title>
+    <link rel="icon" type="image/png" href="/images/sat4.png">
+    <meta property="og:title" content="Saturn V2 Apps">
+    <meta property="og:description" content="Browse apps on Saturn V2">
+    <meta property="og:url" content="https://www.saturnproxy.games">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#9333ea">
+    
+    <link rel="stylesheet" href="/css/a.css">
+        <script src="/uv/uv.bundle.js" type="module"></script>
+    <script src="/uv/uv.config.js" type="module"></script>
+    <script src="/js/scramjet/scramjet.all.js" type="module"></script>
+    <script src="/baremux/index.js" type="module"></script>
+    <script src="/libcurl/index.js" type="module"></script>
+    <script src="/epoxy/index.js" type="module"></script>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+   
+
+    <div id="particles-js"></div>
+    <div class="grain-overlay"></div>
+
+
+    <div class="preload" id="preload">
+        <div class="preload-spinner"></div>
+        <p>Loading Apps...</p>
+    </div>
+
+
+    <div class="main-wrapper">
+   
+        <div class="search-container">
+            <div class="search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input 
+                    type="text" 
+                    id="searchBar" 
+                    class="search-bar" 
+                    placeholder="Search for apps..."
+                    autocomplete="off"
+                >
+            </div>
+            
+            <select id="categorySelect" class="category-select">
+                <option value="All">All Categories</option>
+            </select>
+        </div>
+
+        
+        <div class="games-grid" id="gameCardsGrid">
+    
+        </div>
+    </div>
+
+
+       <script src="/js/app.js"></script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/background/particle.js"></script>
+</body>
+</html>
