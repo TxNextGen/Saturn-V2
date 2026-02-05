@@ -317,7 +317,7 @@ function applySavedCloak() {
     if (cloakDisabled) {
         const currentPath = window.location.pathname;
         if (currentPath.includes('settings') || currentPath.includes('s.html')) {
-            applyTabCloak("Saturn V2", ORIGINAL_FAVICON);
+            applyTabCloak("Saturn", ORIGINAL_FAVICON);
         }
         return;
     }
@@ -340,7 +340,7 @@ function clearCloak() {
     
     const currentPath = window.location.pathname;
     if (currentPath.includes('settings') || currentPath.includes('s.html')) {
-        applyTabCloak("Saturn Proxy | Settings", ORIGINAL_FAVICON);
+        applyTabCloak("Saturn", ORIGINAL_FAVICON);
     }
     
     alert('Cloak cleared! Default title and favicon restored.');

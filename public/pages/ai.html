@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saturn AI</title>
+    <title>Ai | Saturn</title>
     <link rel="icon" type="image/png" href="/images/sat4.png">
     <meta property="og:title" content="Saturn AI">
     <meta property="og:description" content="Your intelligent assistant powered by advanced AI models">
@@ -11,12 +11,21 @@
     <meta name="theme-color" content="#8246BE">
     <link rel="stylesheet" href="../css/ai.css">
     
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+
+        <script src="/js/background/vanta.js"></script>
+    
 </head>
 <body>
     
     <script>
-        // Apply saved theme immediately to prevent flash
+      
         (function() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
@@ -26,7 +35,7 @@
                 document.head.appendChild(styleElement);
             }
             
-            // Apply saved cloak
+           
             const cloakDisabled = localStorage.getItem('cloak-disabled') === 'true';
             if (!cloakDisabled) {
                 const savedTitle = localStorage.getItem('custom-title');
