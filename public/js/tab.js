@@ -126,7 +126,6 @@ function getEncodedUrl(url) {
     }
 }
 
-
 window.getEncodedUrl = getEncodedUrl;
 
 async function setConnection(arg) {
@@ -150,7 +149,6 @@ async function setConnection(arg) {
     }
 }
 
-
 (async () => {
     const savedTransport = localStorage.getItem('proxy-transport');
     if (!savedTransport) {
@@ -170,19 +168,12 @@ if (!localStorage.getItem('proxy-backend')) {
     localStorage.setItem('proxy-backend', 'scramjet');
 }
 
-
-if (!localStorage.getItem('sidebar-state')) {
-    localStorage.setItem('sidebar-state', 'open');
-}
-
-
 const MENU_PAGES = {
     games:    { route: '/pages/g.html',  title: 'Games' },
     apps:     { route: '/pages/a.html',  title: 'Apps' },
     ai:       { route: '/pages/ai.html', title: 'AI' },
     settings: { route: '/pages/s.html',  title: 'Settings' }
 };
-
 
 let tabs = [];
 let activeTabId = null;
@@ -203,28 +194,31 @@ class Tab {
     }
 }
 
+
 function createTabElement(tab) {
     const tabEl = document.createElement('div');
-    tabEl.className = 'sidebar-tab';
+    tabEl.className = 'tab';
     tabEl.dataset.tabId = tab.id;
     
     const faviconSrc = tab.favicon || '/images/sat4.png';
     
     tabEl.innerHTML = `
-        <img class="sidebar-tab-favicon" src="${faviconSrc}" alt="">
-        <span class="sidebar-tab-title">${tab.title}</span>
-        <div class="sidebar-tab-close">
-            <img src="/images/icons/x.svg" alt="" class="nav-icon">
+        <img class="tab-favicon" src="${faviconSrc}" alt="">
+        <span class="tab-title">${tab.title}</span>
+        <div class="tab-close">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
         </div>
     `;
     
     tabEl.addEventListener('click', (e) => {
-        if (!e.target.closest('.sidebar-tab-close')) {
+        if (!e.target.closest('.tab-close')) {
             switchTab(tab.id);
         }
     });
     
-    tabEl.querySelector('.sidebar-tab-close').addEventListener('click', (e) => {
+    tabEl.querySelector('.tab-close').addEventListener('click', (e) => {
         e.stopPropagation();
         closeTab(tab.id);
     });
@@ -246,7 +240,6 @@ function createIframeContainer(tab) {
         createLoadingOverlay(container);
         tab.isLoading = true;
         if (tab.tabElement) tab.tabElement.classList.add('loading');
-        
         
         iframe.src = tab.isLocalPage ? tab.url : getEncodedUrl(tab.url);
     }
@@ -303,17 +296,16 @@ function updateTabInfo(tab) {
         if (iframeDoc && iframeDoc.title) {
             tab.title = iframeDoc.title || tab.url || 'New Tab';
             if (tab.tabElement) {
-                const titleEl = tab.tabElement.querySelector('.sidebar-tab-title');
+                const titleEl = tab.tabElement.querySelector('.tab-title');
                 if (titleEl) titleEl.textContent = tab.title;
             }
         }
     } catch (e) {
-    
         if (tab.url && !tab.isLocalPage) {
             try {
                 tab.title = new URL(tab.url).hostname;
                 if (tab.tabElement) {
-                    const titleEl = tab.tabElement.querySelector('.sidebar-tab-title');
+                    const titleEl = tab.tabElement.querySelector('.tab-title');
                     if (titleEl) titleEl.textContent = tab.title;
                 }
             } catch (err) {}
@@ -321,9 +313,7 @@ function updateTabInfo(tab) {
     }
 }
 
-
 async function createTab(url = null, forcedTitle = null, isLocalPage = false) {
-
     if (url && !isLocalPage && !swReady) {
         try {
             await registerSW();
@@ -340,10 +330,11 @@ async function createTab(url = null, forcedTitle = null, isLocalPage = false) {
     const tabElement = createTabElement(tab);
     const container = createIframeContainer(tab);
     
-    const sidebarTabs = document.getElementById('sidebar-tabs');
+
+    const tabsContainer = document.getElementById('tabs-container');
     const iframeWrapper = document.getElementById('iframe-wrapper');
     
-    if (sidebarTabs) sidebarTabs.appendChild(tabElement);
+    if (tabsContainer) tabsContainer.appendChild(tabElement);
     if (iframeWrapper) iframeWrapper.appendChild(container);
     
     switchTab(tab.id);
@@ -366,8 +357,6 @@ function switchTab(tabId) {
     if (tab.tabElement) tab.tabElement.classList.add('active');
     tab.container.classList.add('active');
     activeTabId = tab.id;
-
- 
     window.activeTabId = activeTabId;
     
     if (tab.url) {
@@ -421,7 +410,7 @@ async function navigateTab(tabId, url) {
     
     if (tab.tabElement) {
         tab.tabElement.classList.add('loading');
-        const titleEl = tab.tabElement.querySelector('.sidebar-tab-title');
+        const titleEl = tab.tabElement.querySelector('.tab-title');
         if (titleEl) titleEl.textContent = tab.title;
     }
     
@@ -596,7 +585,6 @@ function toggleQuickSettings() {
     }, 100);
 }
 
-
 function toggleMenuPopup() {
     let popup = document.getElementById('menu-popup');
     if (popup) { popup.remove(); return; }
@@ -672,52 +660,16 @@ function injectDevTools() {
 }
 
 
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    if (!sidebar) return;
-    
-    const isCollapsed = sidebar.classList.contains('collapsed');
-    
-    if (isCollapsed) {
-        sidebar.classList.remove('collapsed');
-        localStorage.setItem('sidebar-state', 'open');
-        console.log('[Sidebar] ✅ Opened');
-    } else {
-        sidebar.classList.add('collapsed');
-        localStorage.setItem('sidebar-state', 'closed');
-        console.log('[Sidebar] ✅ Closed');
-    }
-}
-
-
-function initSidebarState() {
-    const sidebar = document.getElementById('sidebar');
-    const savedState = localStorage.getItem('sidebar-state');
-    
-    if (savedState === 'closed') {
-        sidebar.classList.add('collapsed');
-        console.log('[Sidebar] Loaded in closed state');
-    } else {
-        sidebar.classList.remove('collapsed');
-        console.log('[Sidebar] Loaded in open state');
-    }
-}
-
-
 window.addEventListener('DOMContentLoaded', async () => {
     console.log('[Tab System] Initializing...');
     
-   
-    initSidebarState();
-    
     window.createTab    = createTab;
     window.navigateTab  = navigateTab;
-    window.activeTabId  = activeTabId;   
+    window.activeTabId  = activeTabId;
 
     try { await registerSW(); }
     catch (err) { console.error('[Tab System] SW registration failed:', err); }
     
- 
     createTab();
     
     const proxyUrlBar = document.getElementById('proxy-url-bar');
@@ -744,15 +696,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    const sidebarAddTab = document.getElementById('sidebar-add-tab');
-    if (sidebarAddTab) sidebarAddTab.addEventListener('click', () => createTab());
-
-  
-    const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
-    if (sidebarToggleBtn) {
-        sidebarToggleBtn.addEventListener('click', toggleSidebar);
-        console.log('[Sidebar] Toggle button initialized');
-    }
+   
+    const tabAddBtn = document.getElementById('tab-add-btn');
+    if (tabAddBtn) tabAddBtn.addEventListener('click', () => createTab());
 
     const searchEngineBtn = document.querySelector('.search-engine-btn');
     if (searchEngineBtn) searchEngineBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleSearchEnginePopup(); });

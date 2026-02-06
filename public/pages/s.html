@@ -19,8 +19,7 @@
 <body>
 
  
-    <div id="particles-js"></div>
-    <div class="grain-overlay"></div>
+        <div class="custom-background"></div>
 
     <div class="content">
         <h1>Settings</h1>
@@ -35,32 +34,30 @@
      
         <div id="themes" class="settings-section active">
 
-            <div class="setting-card">
-                <h2>Premade Themes</h2>
-                <p>Choose from our collection of pre-designed themes</p>
-                <div class="button-grid">
-                    <button onclick="clearTheme()">Default</button>
-                    <button onclick="setTheme('blue')">Blue</button>
-                    <button onclick="setTheme('night')">Night</button>
-                    <button onclick="setTheme('red')">Red</button>
-                    <button onclick="setTheme('green')">Green</button>
-                </div>
-            </div>
 
-            <div class="setting-card">
-                <h2>Custom Theme</h2>
-                <p>Create your own theme by editing CSS variables</p>
-                <textarea id="themebox" placeholder="Paste your custom CSS theme here..."></textarea>
-                <button onclick="loadCustomTheme()">Apply Custom Theme</button>
-            </div>
-
-            <div class="setting-card">
-                <h2>Custom Image</h2>
-                <p>Change the image shown in the top left of the screen</p>
-                <button onclick="setCustomImage()">Set Custom Image</button>
-            </div>
+    <div class="setting-card">
+        <h2>Premade Themes</h2>
+        <p>Choose from our collection of pre designed themes with matching backgrounds</p>
+        <div class="button-grid">
+            <button onclick="clearTheme()">Default</button>
+            <button onclick="setTheme('pink-spheres')">Pink Spheres</button>
+            <button onclick="setTheme('purple-glow')">Purple Glow</button>
         </div>
+    </div>
 
+    <div class="setting-card">
+        <h2>Custom Theme</h2>
+        <p>Create your own theme by editing CSS variables</p>
+        <textarea id="themebox" placeholder="Paste your custom CSS theme here..."></textarea>
+        <button onclick="loadCustomTheme()">Apply Custom Theme</button>
+    </div>
+
+    <div class="setting-card">
+        <h2>Custom Image</h2>
+        <p>Change the image shown in the top left of the screen</p>
+        <button onclick="setCustomImage()">Set Custom Image</button>
+    </div>
+</div>
   
         <div id="cloaking" class="settings-section">
 

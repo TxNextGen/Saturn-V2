@@ -15,47 +15,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
- 
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+
 
         <script src="/js/background/vanta.js"></script>
     
 </head>
+
+
 <body>
     
-    <script>
-      
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                const styleElement = document.createElement('style');
-                styleElement.id = 'custom-theme-style';
-                styleElement.textContent = savedTheme;
-                document.head.appendChild(styleElement);
-            }
-            
-           
-            const cloakDisabled = localStorage.getItem('cloak-disabled') === 'true';
-            if (!cloakDisabled) {
-                const savedTitle = localStorage.getItem('custom-title');
-                const savedFavicon = localStorage.getItem('custom-favicon');
-                
-                if (savedTitle) {
-                    document.title = savedTitle;
-                }
-                
-                if (savedFavicon) {
-                    const link = document.createElement('link');
-                    link.rel = 'icon';
-                    link.href = savedFavicon;
-                    document.head.appendChild(link);
-                }
-            }
-        })();
-    </script>
+    <div class="custom-background"></div>
 
-    <div id="particles-js"></div>
+
 
     <div class="ai-container">
      

@@ -11,30 +11,30 @@
     --bg-secondary: #0d0415;
     --bg-tertiary: #1a0a2e;
     --text-primary: #ffffff;
-    --text-secondary: #b47dff;
-    --accent: #b026d3;
-    --accent-hover: #d946ef;
+    --text-secondary: #ff66ff;
+    --accent: #dd00ff;
+    --accent-hover: #ff33ff;
     --border: #2a1440;
-    --accent-secondary: #d946ef;
-    --modal-overlay: rgba(26, 10, 46, 0.85);
-    --shadow-heavy: rgba(176, 38, 211, 0.5);
+    --accent-secondary: #ff33ff;
+    --modal-overlay: rgba(30, 0, 40, 0.85);
+    --shadow-heavy: rgba(221, 0, 255, 0.5);
     
     
-    --bg-card: rgba(16, 13, 41, 0.5);
-    --accent-primary: #d946ef;
-    --text-muted: #b47dff;
-    --text-dim: rgba(180, 125, 255, 0.5);
-    --border-color: rgba(176, 38, 211, 0.4);
-    --border-glow: rgba(176, 38, 211, 0.3);
-    --input-bg: rgba(16, 13, 41, 0.3);
-    --input-bg-focus: rgba(16, 13, 41, 0.5);
-    --btn-bg: rgba(176, 38, 211, 0.2);
-    --btn-hover-bg: rgba(217, 70, 239, 0.3);
-    --tab-active-bg: rgba(176, 38, 211, 0.3);
-    --tab-active-shadow: 0 0 20px rgba(176, 38, 211, 0.5);
-    --primary: #b026d3;
-    --secondary: #d946ef;
-    --glow: rgba(176, 38, 211, 0.45);
+    --bg-card: rgba(20, 0, 30, 0.5);
+    --accent-primary: #ff33ff;
+    --text-muted: #ff66ff;
+    --text-dim: rgba(255, 102, 255, 0.5);
+    --border-color: rgba(221, 0, 255, 0.4);
+    --border-glow: rgba(221, 0, 255, 0.3);
+    --input-bg: rgba(20, 0, 30, 0.3);
+    --input-bg-focus: rgba(20, 0, 30, 0.5);
+    --btn-bg: rgba(221, 0, 255, 0.2);
+    --btn-hover-bg: rgba(255, 102, 255, 0.3);
+    --tab-active-bg: rgba(221, 0, 255, 0.3);
+    --tab-active-shadow: 0 0 20px rgba(221, 0, 255, 0.5);
+    --primary: #dd00ff;
+    --secondary: #ff33ff;
+    --glow: rgba(221, 0, 255, 0.45);
 }
 
 body {
@@ -48,16 +48,30 @@ body {
 }
 
 
-#particles-js {
+.custom-background {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 0;
-    background: #000000;
+    background: #000000; 
+    background-image: url('/images/back.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
+.custom-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+}
 
 .ai-container {
     position: relative;
@@ -344,5 +358,3 @@ body {
     width: 20px;
     height: 20px;
 }
-
-

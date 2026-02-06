@@ -26,148 +26,123 @@ window.addEventListener('DOMContentLoaded', () => {
     if (btn) btn.classList.add('active');
     
     applySavedCloak();
+    applyTheme();
+    applyBackground();
 });
 
 
 const premadeThemes = {
-    "blue": `:root {
-        --bg-secondary: #0d1021;
-        --bg-tertiary: #1a2040;
-        --text-secondary: #7d9dff;
-        --accent: #4776d9;
-        --accent-hover: #6487e6;
-        --border: #2a4080;
-        --accent-secondary: #6487e6;
-        --modal-overlay: rgba(13, 16, 33, 0.85);
-        --shadow-heavy: rgba(71, 118, 217, 0.5);
-        --bg-card: rgba(16, 13, 41, 0.5);
-        --accent-primary: #6487e6;
-        --text-muted: #a0b1ff;
-        --text-dim: rgba(160, 177, 255, 0.5);
-        --border-color: rgba(100, 135, 230, 0.4);
-        --border-glow: rgba(100, 135, 230, 0.3);
-        --input-bg: rgba(16, 13, 41, 0.3);
-        --input-bg-focus: rgba(16, 13, 41, 0.5);
-        --btn-bg: rgba(71, 118, 217, 0.2);
-        --btn-hover-bg: rgba(100, 135, 230, 0.3);
-        --tab-active-bg: rgba(71, 118, 217, 0.3);
-        --tab-active-shadow: 0 0 20px rgba(71, 118, 217, 0.5);
-        --primary: #4776d9;
-        --secondary: #6487e6;
-        --glow: rgba(71, 118, 217, 0.45);
-    }
-    .home-title { color: #6487e6 !important; }
-    .sidebar-add-tab { background: #4776d9 !important; }
-    .sidebar-add-tab:hover { background: #6487e6 !important; }
-    #uv-address:focus { border-color: #6487e6 !important; }
-    .add-shortcut-btn:hover { border-color: #6487e6 !important; color: #6487e6 !important; }`,
+    "default": {
+        css: `:root {
+            --bg-secondary: #0a0014;
+            --bg-tertiary: #1a0a2e;
+            --text-secondary: #ff66ff;
+            --accent: #dd00ff;
+            --accent-hover: #ff33ff;
+            --border: rgba(255, 102, 255, 0.2);
+            --accent-secondary: #ff33ff;
+            --modal-overlay: rgba(10, 0, 20, 0.95);
+            --shadow-heavy: rgba(221, 0, 255, 0.5);
+            --bg-card: rgba(26, 10, 46, 0.6);
+            --accent-primary: #ff66ff;
+            --text-muted: #ff66ff;
+            --text-dim: rgba(255, 102, 255, 0.5);
+            --border-color: rgba(255, 102, 255, 0.4);
+            --border-glow: rgba(255, 102, 255, 0.3);
+            --input-bg: rgba(26, 10, 46, 0.3);
+            --input-bg-focus: rgba(26, 10, 46, 0.5);
+            --btn-bg: rgba(221, 0, 255, 0.2);
+            --btn-hover-bg: rgba(255, 102, 255, 0.3);
+            --tab-active-bg: rgba(221, 0, 255, 0.3);
+            --tab-active-shadow: 0 0 20px rgba(221, 0, 255, 0.5);
+            --primary: #dd00ff;
+            --secondary: #ff33ff;
+            --glow: rgba(221, 0, 255, 0.45);
+        }
+        .home-title { color: #ff66ff !important; }
+        .tab-add-btn { background: rgba(221, 0, 255, 0.2) !important; }
+        .tab-add-btn:hover { background: rgba(255, 102, 255, 0.3) !important; }
+        #uv-address:focus { border-color: #ff66ff !important; }
+        .add-shortcut-btn:hover { border-color: #ff66ff !important; color: #ff66ff !important; }`,
+        background: '/images/back.png'
+    },
     
-    "night": `:root {
-        --bg-secondary: #1a1a1a;
-        --bg-tertiary: #2a2a2a;
-        --text-secondary: #b3b3b3;
-        --accent: #818181;
-        --accent-hover: #9a9a9a;
-        --border: #3a3a3a;
-        --accent-secondary: #9a9a9a;
-        --modal-overlay: rgba(26, 26, 26, 0.85);
-        --shadow-heavy: rgba(129, 129, 129, 0.5);
-        --bg-card: rgba(40, 40, 40, 0.5);
-        --accent-primary: #b3b3b3;
-        --text-muted: #b3b3b3;
-        --text-dim: rgba(179, 179, 179, 0.5);
-        --border-color: rgba(129, 129, 129, 0.4);
-        --border-glow: rgba(129, 129, 129, 0.3);
-        --input-bg: rgba(40, 40, 40, 0.3);
-        --input-bg-focus: rgba(40, 40, 40, 0.5);
-        --btn-bg: rgba(129, 129, 129, 0.2);
-        --btn-hover-bg: rgba(129, 129, 129, 0.3);
-        --tab-active-bg: rgba(129, 129, 129, 0.3);
-        --tab-active-shadow: 0 0 20px rgba(129, 129, 129, 0.5);
-        --primary: #818181;
-        --secondary: #9a9a9a;
-        --glow: rgba(129, 129, 129, 0.45);
-    }
-    .home-title { color: #b3b3b3 !important; }
-    .sidebar-add-tab { background: #818181 !important; }
-    .sidebar-add-tab:hover { background: #9a9a9a !important; }
-    #uv-address:focus { border-color: #b3b3b3 !important; }
-    .add-shortcut-btn:hover { border-color: #b3b3b3 !important; color: #b3b3b3 !important; }`,
+    "pink-spheres": {
+        css: `:root {
+            --bg-secondary: #1a0520;
+            --bg-tertiary: #2d0a3a;
+            --text-secondary: #ff99ff;
+            --accent: #e642ff;
+            --accent-hover: #ff66ff;
+            --border: rgba(255, 102, 255, 0.25);
+            --accent-secondary: #ff66ff;
+            --modal-overlay: rgba(26, 5, 32, 0.95);
+            --shadow-heavy: rgba(230, 66, 255, 0.5);
+            --bg-card: rgba(45, 10, 58, 0.6);
+            --accent-primary: #ff99ff;
+            --text-muted: #ff99ff;
+            --text-dim: rgba(255, 153, 255, 0.5);
+            --border-color: rgba(255, 102, 255, 0.4);
+            --border-glow: rgba(255, 102, 255, 0.3);
+            --input-bg: rgba(45, 10, 58, 0.3);
+            --input-bg-focus: rgba(45, 10, 58, 0.5);
+            --btn-bg: rgba(230, 66, 255, 0.2);
+            --btn-hover-bg: rgba(255, 102, 255, 0.3);
+            --tab-active-bg: rgba(230, 66, 255, 0.3);
+            --tab-active-shadow: 0 0 20px rgba(230, 66, 255, 0.5);
+            --primary: #e642ff;
+            --secondary: #ff66ff;
+            --glow: rgba(230, 66, 255, 0.45);
+        }
+        .home-title { color: #ff99ff !important; }
+        .tab-add-btn { background: rgba(230, 66, 255, 0.2) !important; }
+        .tab-add-btn:hover { background: rgba(255, 102, 255, 0.3) !important; }
+        #uv-address:focus { border-color: #ff99ff !important; }
+        .add-shortcut-btn:hover { border-color: #ff99ff !important; color: #ff99ff !important; }`,
+        background: '/images/back2.jpg'  
+    },
     
-    "red": `:root {
-        --bg-secondary: #210d0d;
-        --bg-tertiary: #3a1a1a;
-        --text-secondary: #ff7d7d;
-        --accent: #974646;
-        --accent-hover: #b85656;
-        --border: #4a2a2a;
-        --accent-secondary: #b85656;
-        --modal-overlay: rgba(33, 13, 13, 0.85);
-        --shadow-heavy: rgba(151, 70, 70, 0.5);
-        --bg-card: rgba(41, 13, 13, 0.5);
-        --accent-primary: #ffa0a0;
-        --text-muted: #ffa0a0;
-        --text-dim: rgba(255, 160, 160, 0.5);
-        --border-color: rgba(151, 70, 70, 0.4);
-        --border-glow: rgba(151, 70, 70, 0.3);
-        --input-bg: rgba(41, 13, 13, 0.3);
-        --input-bg-focus: rgba(41, 13, 13, 0.5);
-        --btn-bg: rgba(151, 70, 70, 0.2);
-        --btn-hover-bg: rgba(151, 70, 70, 0.3);
-        --tab-active-bg: rgba(151, 70, 70, 0.3);
-        --tab-active-shadow: 0 0 20px rgba(151, 70, 70, 0.5);
-        --primary: #974646;
-        --secondary: #b85656;
-        --glow: rgba(151, 70, 70, 0.45);
+    "purple-glow": {
+        css: `:root {
+            --bg-secondary: #1a0a2e;
+            --bg-tertiary: #2d1548;
+            --text-secondary: #d88fff;
+            --accent: #c44fff;
+            --accent-hover: #d88fff;
+            --border: rgba(216, 143, 255, 0.25);
+            --accent-secondary: #d88fff;
+            --modal-overlay: rgba(26, 10, 46, 0.95);
+            --shadow-heavy: rgba(196, 79, 255, 0.5);
+            --bg-card: rgba(45, 21, 72, 0.6);
+            --accent-primary: #d88fff;
+            --text-muted: #d88fff;
+            --text-dim: rgba(216, 143, 255, 0.5);
+            --border-color: rgba(216, 143, 255, 0.4);
+            --border-glow: rgba(216, 143, 255, 0.3);
+            --input-bg: rgba(45, 21, 72, 0.3);
+            --input-bg-focus: rgba(45, 21, 72, 0.5);
+            --btn-bg: rgba(196, 79, 255, 0.2);
+            --btn-hover-bg: rgba(216, 143, 255, 0.3);
+            --tab-active-bg: rgba(196, 79, 255, 0.3);
+            --tab-active-shadow: 0 0 20px rgba(196, 79, 255, 0.5);
+            --primary: #c44fff;
+            --secondary: #d88fff;
+            --glow: rgba(196, 79, 255, 0.45);
+        }
+        .home-title { color: #d88fff !important; }
+        .tab-add-btn { background: rgba(196, 79, 255, 0.2) !important; }
+        .tab-add-btn:hover { background: rgba(216, 143, 255, 0.3) !important; }
+        #uv-address:focus { border-color: #d88fff !important; }
+        .add-shortcut-btn:hover { border-color: #d88fff !important; color: #d88fff !important; }`,
+        background: '/images/back3.png'  
     }
-    .home-title { color: #ffa0a0 !important; }
-    .sidebar-add-tab { background: #974646 !important; }
-    .sidebar-add-tab:hover { background: #b85656 !important; }
-    #uv-address:focus { border-color: #ffa0a0 !important; }
-    .add-shortcut-btn:hover { border-color: #ffa0a0 !important; color: #ffa0a0 !important; }`,
-    
-    "green": `:root {
-        --bg-secondary: #0d210d;
-        --bg-tertiary: #1a3a1a;
-        --text-secondary: #8fff7d;
-        --accent: #62be46;
-        --accent-hover: #7dd664;
-        --border: #2a4a2a;
-        --accent-secondary: #7dd664;
-        --modal-overlay: rgba(13, 33, 13, 0.85);
-        --shadow-heavy: rgba(98, 190, 70, 0.5);
-        --bg-card: rgba(22, 41, 13, 0.5);
-        --accent-primary: #a8ffa0;
-        --text-muted: #a8ffa0;
-        --text-dim: rgba(168, 255, 160, 0.5);
-        --border-color: rgba(137, 230, 100, 0.4);
-        --border-glow: rgba(137, 230, 100, 0.3);
-        --input-bg: rgba(22, 41, 13, 0.3);
-        --input-bg-focus: rgba(22, 41, 13, 0.5);
-        --btn-bg: rgba(98, 190, 70, 0.2);
-        --btn-hover-bg: rgba(137, 230, 100, 0.3);
-        --tab-active-bg: rgba(98, 190, 70, 0.3);
-        --tab-active-shadow: 0 0 20px rgba(98, 190, 70, 0.5);
-        --primary: #62be46;
-        --secondary: #7dd664;
-        --glow: rgba(98, 190, 70, 0.45);
-    }
-    .home-title { color: #a8ffa0 !important; }
-    .sidebar-add-tab { background: #62be46 !important; }
-    .sidebar-add-tab:hover { background: #7dd664 !important; }
-    #uv-address:focus { border-color: #a8ffa0 !important; }
-    .add-shortcut-btn:hover { border-color: #a8ffa0 !important; color: #a8ffa0 !important; }`
 };
-
 
 const themeParticleColors = {
     'default': ['#b026d3', '#d946ef', '#a855f7'],
-    'blue': ['#6487e6', '#4776d9', '#a0b1ff'],
-    'night': ['#818181', '#505050', '#b3b3b3'],
-    'red': ['#974646', '#722929', '#ffa0a0'],
-    'green': ['#89e664', '#62be46', '#a8ffa0']
+    'pink-spheres': ['#e642ff', '#ff66ff', '#ff99ff'],
+    'purple-glow': ['#c44fff', '#d88fff', '#a855f7']
 };
-
 
 function broadcastThemeChange(themeName) {
     const event = new CustomEvent('themeChange', {
@@ -175,13 +150,11 @@ function broadcastThemeChange(themeName) {
     });
     window.dispatchEvent(event);
     
- 
     if ('BroadcastChannel' in window) {
         const channel = new BroadcastChannel('theme_channel');
         channel.postMessage({ type: 'themeChange', theme: themeName });
         channel.close();
     }
-    
     
     localStorage.setItem('theme-change-event', JSON.stringify({
         theme: themeName,
@@ -189,13 +162,22 @@ function broadcastThemeChange(themeName) {
     }));
 }
 
-function formatCSS(css) { 
-    return css.replace(/\s*{\s*/g, ' {\n  ')
-              .replace(/;\s*/g, ';\n  ')
-              .replace(/\s*}\s*/g, '\n}');  
-}
-
 function applyTheme() {
+    const currentThemeName = localStorage.getItem('current-theme-name');
+    
+    
+    if (!currentThemeName || currentThemeName === 'default') {
+        const existingStyle = document.getElementById('custom-theme-style');
+        if (existingStyle) existingStyle.remove();
+        
+        const styleElement = document.createElement('style');
+        styleElement.id = 'custom-theme-style';
+        styleElement.textContent = premadeThemes.default.css;
+        document.head.appendChild(styleElement);
+        return;
+    }
+    
+  
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         const existingStyle = document.getElementById('custom-theme-style');
@@ -207,47 +189,93 @@ function applyTheme() {
     }
 }
 
+function applyBackground() {
+    const currentThemeName = localStorage.getItem('current-theme-name');
+    const backgroundEl = document.querySelector('.custom-background');
+    
+    if (!backgroundEl) return;
+    
+   
+    if (!currentThemeName || currentThemeName === 'default') {
+        backgroundEl.style.backgroundImage = `url('${premadeThemes.default.background}')`;
+        return;
+    }
+    
+ 
+    const customImg = localStorage.getItem('custom-img');
+    if (customImg) {
+        backgroundEl.style.backgroundImage = `url('${customImg}')`;
+        return;
+    }
+    
+
+    const savedBackground = localStorage.getItem('theme-background');
+    if (savedBackground) {
+        backgroundEl.style.backgroundImage = `url('${savedBackground}')`;
+    } else {
+     
+        backgroundEl.style.backgroundImage = `url('${premadeThemes.default.background}')`;
+    }
+}
+
 function clearTheme() {
     localStorage.removeItem('theme');
     localStorage.removeItem('current-theme-name');
+    localStorage.removeItem('theme-background');
     localStorage.removeItem('custom-img');
     
     const existingStyle = document.getElementById('custom-theme-style');
     if (existingStyle) existingStyle.remove();
     
+   
+    const styleElement = document.createElement('style');
+    styleElement.id = 'custom-theme-style';
+    styleElement.textContent = premadeThemes.default.css;
+    document.head.appendChild(styleElement);
+    
+    const backgroundEl = document.querySelector('.custom-background');
+    if (backgroundEl) {
+        backgroundEl.style.backgroundImage = `url('${premadeThemes.default.background}')`;
+    }
     
     if (typeof pJSDom !== 'undefined' && pJSDom[0]) {
         pJSDom[0].pJS.particles.color.value = themeParticleColors.default;
         pJSDom[0].pJS.particles.line_linked.color = themeParticleColors.default[0];
         pJSDom[0].pJS.fn.particlesRefresh();
     }
-    
 
     if (typeof window.applyGlobalTheme === 'function') {
         window.applyGlobalTheme('default');
     }
     
-  
     broadcastThemeChange('default');
     
     alert('Theme cleared! Default theme applied.');
 }
 
 function setTheme(theme) {
-  
-    localStorage.setItem('theme', premadeThemes[theme]);
-    localStorage.setItem('current-theme-name', theme);
-    localStorage.removeItem('custom-img');
+    if (!premadeThemes[theme]) {
+        alert('Theme not found!');
+        return;
+    }
     
+    localStorage.setItem('theme', premadeThemes[theme].css);
+    localStorage.setItem('current-theme-name', theme);
+    localStorage.setItem('theme-background', premadeThemes[theme].background);
+    localStorage.removeItem('custom-img');
     
     const existingStyle = document.getElementById('custom-theme-style');
     if (existingStyle) existingStyle.remove();
     const styleElement = document.createElement('style');
     styleElement.id = 'custom-theme-style';
-    styleElement.textContent = premadeThemes[theme];
+    styleElement.textContent = premadeThemes[theme].css;
     document.head.appendChild(styleElement);
     
-   
+    const backgroundEl = document.querySelector('.custom-background');
+    if (backgroundEl) {
+        backgroundEl.style.backgroundImage = `url('${premadeThemes[theme].background}')`;
+    }
+    
     if (typeof pJSDom !== 'undefined' && pJSDom[0]) {
         if (themeParticleColors[theme]) {
             pJSDom[0].pJS.particles.color.value = themeParticleColors[theme];
@@ -255,16 +283,14 @@ function setTheme(theme) {
             pJSDom[0].pJS.fn.particlesRefresh();
         }
     }
-    
 
     if (typeof window.applyGlobalTheme === 'function') {
         window.applyGlobalTheme(theme);
     }
     
-  
     broadcastThemeChange(theme);
     
-    alert(`${theme.charAt(0).toUpperCase() + theme.slice(1)} theme applied!`);
+    alert(`${theme.charAt(0).toUpperCase() + theme.slice(1).replace('-', ' ')} theme applied!`);
 }
 
 function loadCustomTheme() {
@@ -280,7 +306,6 @@ function loadCustomTheme() {
         styleElement.textContent = themeValue;
         document.head.appendChild(styleElement);
         
-        
         broadcastThemeChange('custom');
         
         alert('Custom theme applied!');
@@ -291,7 +316,14 @@ function setCustomImage() {
     const imageUrl = prompt('Enter the URL of your custom image:');
     if (imageUrl) {
         localStorage.setItem('custom-img', imageUrl);
-        alert('Custom image set! It will appear on other pages with the Saturn logo.');
+        localStorage.setItem('current-theme-name', 'custom'); 
+        
+        const backgroundEl = document.querySelector('.custom-background');
+        if (backgroundEl) {
+            backgroundEl.style.backgroundImage = `url('${imageUrl}')`;
+        }
+        
+        alert('Custom image set! It will appear on all pages.');
     }
 }
 
@@ -472,7 +504,6 @@ function setProxyBackend(backend) {
     alert(`Proxy backend changed to ${backend === 'scramjet' ? 'Scramjet' : 'Ultraviolet'}! Reload the page or create a new tab for changes to take effect.`);
 }
 
-
 window.addEventListener('storage', (e) => {
     if (e.key === 'theme-change-event') {
         try {
@@ -480,6 +511,7 @@ window.addEventListener('storage', (e) => {
             if (data && data.theme) {
                 console.log('[settings.js] Theme change detected:', data.theme);
                 applyTheme();
+                applyBackground();
             }
         } catch (err) {
             console.error('[settings.js] Error parsing theme change:', err);
@@ -487,21 +519,17 @@ window.addEventListener('storage', (e) => {
     }
 });
 
-
 if ('BroadcastChannel' in window) {
     const channel = new BroadcastChannel('theme_channel');
     channel.addEventListener('message', (event) => {
         if (event.data.type === 'themeChange') {
             console.log('[settings.js] Theme change via BroadcastChannel:', event.data.theme);
             applyTheme();
+            applyBackground();
         }
     });
 }
 
 window.addEventListener('load', () => {
     setTimeout(initProxy, 500);
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-    applyTheme();
 });
