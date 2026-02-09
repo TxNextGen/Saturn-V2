@@ -363,7 +363,7 @@ body {
     opacity: 0.6;
 }
 
-/* Shortcuts */
+
 .shortcuts-container {
     width: 100%;
 }
@@ -412,7 +412,54 @@ body {
     opacity: 1;
 }
 
-/* iFrame Wrapper */
+
+.social-footer {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    display: flex;
+    gap: 16px;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.social-link {
+    width: 65px;
+    height: 65px;
+    background: rgba(26, 10, 46, 0.9);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+    text-decoration: none;
+    box-shadow: 0 4px 25px rgba(221, 0, 255, 0.3);
+}
+
+.social-link:hover {
+    background: rgba(221, 0, 255, 0.3);
+    border-color: #ff66ff;
+    border-width: 3px;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 12px 40px rgba(221, 0, 255, 0.7);
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    filter: brightness(1.3) saturate(1.5);
+    transform: scale(1.1);
+}
+
+
 .iframe-wrapper {
     flex: 1;
     position: relative;
@@ -442,7 +489,7 @@ body {
     border: none;
 }
 
-/* Loading Animation */
+
 .proxy-loading-animation {
     position: absolute;
     top: 0;
@@ -517,7 +564,7 @@ body {
     color: var(--text-secondary);
 }
 
-/* Quick Popup */
+
 .quick-popup {
     position: fixed;
     background: rgba(10, 0, 20, 0.95);
@@ -595,7 +642,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Modal */
+
 .modal {
     position: fixed;
     top: 0;

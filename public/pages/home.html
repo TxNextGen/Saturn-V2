@@ -131,6 +131,44 @@ gtag('config', 'G-KWJMCRLF9S');
         <div class="iframe-wrapper" id="iframe-wrapper"></div>
     </div>
 
+  
+    <div class="social-footer" id="social-footer">
+        <a href="https://discord.gg/vAF5AZHwwD" target="_blank" class="social-link" title="Discord">
+            <img src="/images/discord.png" alt="Discord" class="social-icon">
+        </a>
+        <a href="https://www.tiktok.com/@saturnproxy" target="_blank" class="social-link" title="TikTok">
+            <img src="/images/tiktok.png" alt="TikTok" class="social-icon">
+        </a>
+    </div>
+
+    <script>
+      
+        const homeContainer = document.getElementById('home-container');
+        const socialFooter = document.getElementById('social-footer');
+        
+        const observer = new MutationObserver(() => {
+            if (homeContainer.style.display === 'none' || !homeContainer.classList.contains('active')) {
+                socialFooter.style.display = 'none';
+            } else {
+                socialFooter.style.display = 'flex';
+            }
+        });
+        
+        observer.observe(homeContainer, { attributes: true, attributeFilter: ['style', 'class'] });
+        
+      
+        const iframeWrapper = document.getElementById('iframe-wrapper');
+        const iframeObserver = new MutationObserver(() => {
+            if (iframeWrapper.classList.contains('active')) {
+                socialFooter.style.display = 'none';
+            } else {
+                socialFooter.style.display = 'flex';
+            }
+        });
+        
+        iframeObserver.observe(iframeWrapper, { attributes: true, attributeFilter: ['class'] });
+    </script>
+
     <script src="/js/background/vanta.js"></script>
 </body>
 </html>
