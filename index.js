@@ -8,17 +8,12 @@ import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 const port = parseInt(process.env.PORT || "8080", 10);
 const pubDir = join(__dirname, "public");
-
 const app = express();
 const server = createServer(app);
-
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
@@ -31,13 +26,9 @@ app.use((req, res, next) => {
   res.setHeader("Service-Worker-Allowed", "/");
   next();
 });
-
-
 app.get("/", (req, res) => {
   res.sendFile(join(pubDir, "pages", "home.html"));
 });
-
-
 app.use(express.static(pubDir));
 app.use("/uv/", express.static(uvPath));
 app.use("/libcurl/", express.static(libcurlPath));
@@ -45,11 +36,13 @@ app.use("/epoxy/", express.static(epoxyPath));
 app.use("/baremux/", express.static(baremuxPath));
 
 
+app.get("/check-domain", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.use((req, res) => {
   res.status(404).sendFile(join(pubDir, "404.html"));
 });
-
-
 server.on("upgrade", (req, socket, head) => {
   if (req.url.endsWith("/wisp/")) {
     routeRequest(req, socket, head);
@@ -57,7 +50,6 @@ server.on("upgrade", (req, socket, head) => {
     socket.end();
   }
 });
-
 server.listen(port, "0.0.0.0", () => {
   console.log(`| SaturnProxy 1.0 | Running on http://localhost:${port}`);
 });
